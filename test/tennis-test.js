@@ -9,5 +9,12 @@ describe('Tennis', function(){
 	  score.Alberto.should.equal(0);
 	  score.Stefano.should.equal(0);
     });
-  })
+	
+	it('initial set score is 0 for both players', function() {
+      var game = new tennis.Game('Alberto', 'Stefano');
+	  var score = game.getCurrentSetScore();
+	  score.Alberto.should.equal(0);
+	  score.Stefano.should.equal(0);
+    });
+  });
 })

@@ -3,9 +3,11 @@ var tennis = require('../tennis');
 
 describe('Tennis', function(){
   describe('setup', function() {
-    it('should return 0-0 for a new game', function() {
+    it('should return 0 for current game score', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
-	  game.score().should.equal('0 - 0');
+	  var score = game.getCurrentGameScore();
+	  score.Alberto.should.equal(0);
+	  score.Stefano.should.equal(0);
     });
   })
 })

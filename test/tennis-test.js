@@ -3,7 +3,7 @@ var tennis = require('../tennis');
 
 describe('Tennis', function(){
   describe('setup', function() {
-    it('should return 0 for current game score', function() {
+    it('initial game score is 0 for both players', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
 	  var score = game.getCurrentGameScore();
 	  score.Alberto.should.equal(0);

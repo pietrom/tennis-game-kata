@@ -22,11 +22,19 @@ describe('Tennis', function() {
   });
   
   describe('play a game', function() {
-	it('score a point', function() {
-		var game = new tennis.Game('Alberto', 'Stefano');
-		game.scorePoint('Alberto');
-		var score = game.getCurrentGameScore();
-		assertScoreIs(score, 15, 0);
-	});
+  	it('score a point', function() {
+  		var game = new tennis.Game('Alberto', 'Stefano');
+  		game.scorePoint('Alberto');
+  		var score = game.getCurrentGameScore();
+  		assertScoreIs(score, 15, 0);
+  	});
+
+    it('both players score a point', function() {
+      var game = new tennis.Game('Alberto', 'Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Alberto');
+      var score = game.getCurrentGameScore();
+      assertScoreIs(score, 15, 15);
+    });    
   });
 })

@@ -14,15 +14,30 @@ var tennis = {
 	}
 };
 
-function nextGameScore(score) {
-	if(score === 30)
-		return 40;
+function renderGameScore(score) {
+	var scores = ['0', '15', '30'];
 
-	return score + 15;
+	if(score >= scores.length)
+		return '40';
+
+	return scores[score];
 }
 
 tennis.Game.prototype.getCurrentGameScore = function() {
-	return this.currentGameScore;
+	var score = {};
+	var score1 = this.currentGameScore[this.player1];
+	var score2 = this.currentGameScore[this.player2];
+
+
+	score[this.player1] = renderGameScore(score1);
+	score[this.player2] = renderGameScore(score2);
+
+	if(score1 > 3 && score1 > score2)
+		score[this.player1] += '*';
+	if(score2 > 3 && score2 > score1)
+		score[this.player2] += '*';
+
+	return score;
 };
 
 tennis.Game.prototype.getCurrentSetScore = function() {
@@ -33,7 +48,7 @@ tennis.Game.prototype.getCurrentSetScore = function() {
 };
 
 tennis.Game.prototype.scorePoint = function(player) {
-	this.currentGameScore[player] = nextGameScore(this.currentGameScore[player]);
+	this.currentGameScore[player]++;
 };
 
 module.exports = tennis;

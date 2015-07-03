@@ -11,7 +11,7 @@ describe('Tennis', function() {
     it('initial game score is 0 for both players', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
 	  var score = game.getCurrentGameScore();
-	  assertScoreIs(score, 0, 0);
+	  assertScoreIs(score, '0', '0');
     });
 	
 	it('initial set score is 0 for both players', function() {
@@ -26,7 +26,7 @@ describe('Tennis', function() {
   		var game = new tennis.Game('Alberto', 'Stefano');
   		game.scorePoint('Alberto');
   		var score = game.getCurrentGameScore();
-  		assertScoreIs(score, 15, 0);
+  		assertScoreIs(score, '15', '0');
   	});
 
     it('both players score a point', function() {
@@ -34,7 +34,7 @@ describe('Tennis', function() {
       game.scorePoint('Stefano');
       game.scorePoint('Alberto');
       var score = game.getCurrentGameScore();
-      assertScoreIs(score, 15, 15);
+      assertScoreIs(score, '15', '15');
     });
 
     it('a player scores three points', function() {
@@ -43,7 +43,22 @@ describe('Tennis', function() {
       game.scorePoint('Stefano');
       game.scorePoint('Stefano');
       var score = game.getCurrentGameScore();
-      assertScoreIs(score, 0, 40);
+      assertScoreIs(score, '0', '40');
+    });
+
+    it('the game is deuce', function() {
+      var game = new tennis.Game('Alberto', 'Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+      
+      game.scorePoint('Alberto');
+      game.scorePoint('Alberto');
+      game.scorePoint('Alberto');
+      game.scorePoint('Alberto');
+      
+      var score = game.getCurrentGameScore();
+      assertScoreIs(score, '40*', '40');
     });
 
   });

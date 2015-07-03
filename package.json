@@ -1,0 +1,17 @@
+{
+  "name": "tennis",
+  "version": "0.0.1",
+  "description": "The Tennis Game kata",
+  "main": "tennis.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "author": "Pietro Martinelli, Stefano Ossoli, Alberto Venturini",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "mocha": "2.2.5",
+	"should": ">= 7.0.1"
+  },
+  "dependencies": {	
+  }
+}

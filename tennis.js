@@ -14,13 +14,13 @@ var tennis = {
 	}
 };
 
-function renderGameScore(score) {
-	var scores = ['0', '15', '30'];
-
-	if(score >= scores.length)
-		return '40';
-
-	return scores[score];
+function renderGameScore(score1, score2) {
+	var scores = ['0', '15', '30', '40'];
+	var isAdvantage = function(sc1, sc2) {
+		return sc1 >= scores.length && sc1 > sc2;
+	};
+	var baseScore = scores[Math.min((scores.length - 1), score1)];
+	return baseScore + (isAdvantage(score1, score2) ? '*' : '');
 }
 
 tennis.Game.prototype.getCurrentGameScore = function() {
@@ -28,14 +28,8 @@ tennis.Game.prototype.getCurrentGameScore = function() {
 	var score1 = this.currentGameScore[this.player1];
 	var score2 = this.currentGameScore[this.player2];
 
-
-	score[this.player1] = renderGameScore(score1);
-	score[this.player2] = renderGameScore(score2);
-
-	if(score1 > 3 && score1 > score2)
-		score[this.player1] += '*';
-	if(score2 > 3 && score2 > score1)
-		score[this.player2] += '*';
+	score[this.player1] = renderGameScore(score1, score2);
+	score[this.player2] = renderGameScore(score2, score1);
 
 	return score;
 };
@@ -50,5 +44,50 @@ tennis.Game.prototype.getCurrentSetScore = function() {
 tennis.Game.prototype.scorePoint = function(player) {
 	this.currentGameScore[player]++;
 };
+
+
+// var stateLove = {
+// 	next : function() {
+// 		return state15;
+// 	},
+
+// 	render : function() {
+// 		return '0';
+// 	}
+// };
+
+// var state15 = {
+// 	next : function() {
+// 		return state30;
+// 	},
+
+// 	render : function() {
+// 		return '15';
+// 	}
+// };
+
+// var state30 = {
+// 	next : function() {
+// 		return  state40;
+// 	},
+
+// 	render : function() {
+// 		return '30';
+// 	}
+// };
+
+
+// var state40 = {
+// 	next : function(other) {
+
+// 		return  stateAdvantage;
+// 	},
+
+// 	render : function() {
+// 		return '40';
+// 	}
+// };
+
+
 
 module.exports = tennis;

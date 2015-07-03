@@ -14,6 +14,13 @@ var tennis = {
 	}
 };
 
+function nextGameScore(score) {
+	if(score === 30)
+		return 40;
+
+	return score + 15;
+}
+
 tennis.Game.prototype.getCurrentGameScore = function() {
 	return this.currentGameScore;
 };
@@ -26,7 +33,7 @@ tennis.Game.prototype.getCurrentSetScore = function() {
 };
 
 tennis.Game.prototype.scorePoint = function(player) {
-	this.currentGameScore[player] += 15;
+	this.currentGameScore[player] = nextGameScore(this.currentGameScore[player]);
 };
 
 module.exports = tennis;

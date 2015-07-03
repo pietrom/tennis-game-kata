@@ -35,6 +35,16 @@ describe('Tennis', function() {
       game.scorePoint('Alberto');
       var score = game.getCurrentGameScore();
       assertScoreIs(score, 15, 15);
-    });    
+    });
+
+    it('a player scores three points', function() {
+      var game = new tennis.Game('Alberto', 'Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+      var score = game.getCurrentGameScore();
+      assertScoreIs(score, 0, 40);
+    });
+
   });
 })

@@ -46,7 +46,7 @@ describe('Tennis', function() {
       assertScoreIs(score, '0', '40');
     });
 
-    it('the game is deuce', function() {
+    it('the game is advantage for Alberto', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
       game.scorePoint('Stefano');
       game.scorePoint('Stefano');
@@ -59,6 +59,23 @@ describe('Tennis', function() {
       
       var score = game.getCurrentGameScore();
       assertScoreIs(score, '40*', '40');
+    });
+	
+	it('the game is deuce after advantage', function() {
+      var game = new tennis.Game('Alberto', 'Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+      
+      game.scorePoint('Alberto');
+      game.scorePoint('Alberto');
+      game.scorePoint('Alberto');
+      game.scorePoint('Alberto');
+	  
+	  game.scorePoint('Stefano');
+      
+      var score = game.getCurrentGameScore();
+      assertScoreIs(score, '40', '40');
     });
 
   });

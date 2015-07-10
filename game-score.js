@@ -5,8 +5,12 @@ var GameScore = function(players) {
 	this.score = [0, 0];
 };
 
-GameScore.prototype.scorePoint = function(player) {
-	this.score[this.players.indexOf(player)]++;	
+GameScore.prototype.scorePoint = function(player, onCompleted) {
+	this.score[this.players.indexOf(player)]++;
+	if(this.isCompleted()) {
+		onCompleted.call();
+		this.score = [0, 0];
+	}
 };
 
 GameScore.prototype.isCompleted = function() {

@@ -22,11 +22,9 @@ tennis.Game.prototype.getCurrentSetScore = function() {
 };
 
 tennis.Game.prototype.scorePoint = function(player) {
-	this.currentGameScore.scorePoint(player);
-	if(this.currentGameScore.isCompleted()) {
-		this.resetGameScore();
+	this.currentGameScore.scorePoint(player, function() {
 		this.currentSetScore.winsGame(player);
-	}	
+	}.bind(this));
 };
 
 module.exports = tennis;

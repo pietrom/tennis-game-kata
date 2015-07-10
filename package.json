@@ -10,8 +10,9 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "mocha": "2.2.5",
-	"should": ">= 7.0.1"
+    "should": ">= 7.0.1"
   },
-  "dependencies": {	
+  "dependencies": {
+    "lodash": "^3.10.0"
   }
 }

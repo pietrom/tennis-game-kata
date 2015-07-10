@@ -6,6 +6,12 @@ function assertScoreIs(score, v1, v2) {
 	score.Stefano.should.equal(v2);
 };
 
+function scorePoints(game, player, count) {
+	for(var i = 0; i < count; i++) {
+		game.scorePoint(player);
+	}
+}
+
 describe('Tennis', function() {
   describe('setup', function() {
     it('initial game score is 0 for both players', function() {
@@ -39,23 +45,16 @@ describe('Tennis', function() {
 
     it('a player scores three points', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
+	  scorePoints(game, 'Stefano', 3);
       var score = game.getCurrentGameScore();
       assertScoreIs(score, '0', '40');
     });
 
     it('the game is advantage for Alberto', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
+      scorePoints(game, 'Stefano', 3);
       
-      game.scorePoint('Alberto');
-      game.scorePoint('Alberto');
-      game.scorePoint('Alberto');
-      game.scorePoint('Alberto');
+      scorePoints(game, 'Alberto', 4);
       
       var score = game.getCurrentGameScore();
       assertScoreIs(score, '40*', '40');
@@ -63,14 +62,9 @@ describe('Tennis', function() {
 	
 	it('the game is deuce after advantage', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
+      scorePoints(game, 'Stefano', 3);
       
-      game.scorePoint('Alberto');
-      game.scorePoint('Alberto');
-      game.scorePoint('Alberto');
-      game.scorePoint('Alberto');
+      scorePoints(game, 'Alberto', 4);
 	  
 	  game.scorePoint('Stefano');
       
@@ -80,10 +74,7 @@ describe('Tennis', function() {
 
 	it('one player wins a game', function() {
       var game = new tennis.Game('Alberto', 'Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
-      game.scorePoint('Stefano');
-	  game.scorePoint('Stefano');      
+      scorePoints(game, 'Stefano', 4);
       var score = game.getCurrentGameScore();
       assertScoreIs(score, '0', '0');
 	  assertScoreIs(game.getCurrentSetScore(), 0, 1);

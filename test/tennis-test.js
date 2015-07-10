@@ -78,5 +78,15 @@ describe('Tennis', function() {
       assertScoreIs(score, '40', '40');
     });
 
+	it('one player wins a game', function() {
+      var game = new tennis.Game('Alberto', 'Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+      game.scorePoint('Stefano');
+	  game.scorePoint('Stefano');      
+      var score = game.getCurrentGameScore();
+      assertScoreIs(score, '0', '0');
+	  assertScoreIs(game.getCurrentSetScore(), 0, 1);
+    });
   });
 })

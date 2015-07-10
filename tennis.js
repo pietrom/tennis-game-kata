@@ -1,8 +1,8 @@
-function createCurrentGameScore(pl1, pl2) {
-	var currentGameScore = {};
-	currentGameScore[pl1] = 0;
-	currentGameScore[pl2] = 0;
-	return currentGameScore;
+function createScore(pl1, pl2) {
+	var score = {};
+	score[pl1] = 0;
+	score[pl2] = 0;
+	return score;
 };
 
 var tennis = {	
@@ -10,7 +10,8 @@ var tennis = {
 	Game: function(player1, player2) {
 		this.player1 = player1;
 		this.player2 = player2;
-		this.currentGameScore = createCurrentGameScore(player1, player2);
+		this.currentGameScore = createScore(player1, player2);
+		this.currentSetScore = createScore(player1, player2);
 	}
 };
 
@@ -35,14 +36,20 @@ tennis.Game.prototype.getCurrentGameScore = function() {
 };
 
 tennis.Game.prototype.getCurrentSetScore = function() {
-	var score = {};
-	score[this.player1] = 0;
-	score[this.player2] = 0;
-	return score;
+	return this.currentSetScore;
 };
 
 tennis.Game.prototype.scorePoint = function(player) {
 	this.currentGameScore[player]++;
+	var otherPlayer = this.player1 === player ? this.player2 : this.player1;
+	if(this.currentGameScore[player] >= 4 && (this.currentGameScore[player] - this.currentGameScore[otherPlayer]) > 1) {
+		this.winAGame(player);
+	}
+};
+
+tennis.Game.prototype.winAGame = function(player) {
+	this.currentSetScore[player]++;
+	this.currentGameScore = createScore(this.player1, this.player2);
 };
 
 
